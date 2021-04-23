@@ -38,26 +38,26 @@
                 <div class="col-md-9">
                     <div class="row">
                         <!-- Personal Data -->
-                        <div class="col-lg-6 mb-4">
-                            <h1 class="profile-header mb-3">{% trans %}Personal Data{% endtrans %}</h1>
-                            <form id="updateData" action="{{ baseUri }}/customer/my-account" method="post" data-id="1">
+                        <div class="col-lg-12 mb-4">
+                            <h1 class="profile-header mb-3 blue-color">{% trans %}Personal Data{% endtrans %}</h1>
+                            <form class="row" id="updateData" action="{{ baseUri }}/customer/my-account" method="post" data-id="1">
                                 <!-- form spoofing -->
                                 <input type="hidden" name="action" value="update_data">
 
-                                <div class="form-group">
+                                <div class="form-group col-lg-6">
                                     <label for="name">{% trans %}Name{% endtrans %}: *</label><br>
                                     <input type="text" name="name" required value="{{ arCustomer.name ?? '' }}" placeholder="{% trans %}Name{% endtrans %}" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-lg-6">
                                     <label for="tax_number">{% trans %}Tax number{% endtrans %}:</label><br>
                                     <input type="text" name="taxNumber" value="{{ arCustomer.taxNumber ?? '' }}" placeholder="{% trans %}Tax number{% endtrans %}" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-lg-6">
                                     <label for="email">{% trans %}Email{% endtrans %}: *</label><br>
                                     <input type="text" name="email" required value="{{ arCustomer.email ?? '' }}" placeholder="{% trans %}Email{% endtrans %}" class="form-control">
                                 </div>
-                                <div class="form-group d-flex">
-                                    <button type="button" class="btn-form-edit secondary-btn">{% trans %}Edit{% endtrans %}</button>
+                                <div class="form-group col-12 d-flex">
+                                    <button type="button" class="btn-form-edit secondary-btn contact-btn-send">{% trans %}Edit{% endtrans %}</button>
                                     <button type="button" class="d-none btn-form-cancel primary-btn">{% trans %}Cancel{% endtrans %}</button>
                                     <button type="submit" class="d-none ml-3 btn-form-save blue-btn">{% trans %}Save{% endtrans %}</button>
                                 </div>
@@ -67,7 +67,7 @@
 
                         <!-- Password -->
                         <div class="col-lg-6 mb-4">
-                            <h1 class="profile-header mb-3">{% trans %}Password{% endtrans %}</h1>
+                            <h1 class="profile-header mb-3 blue-color">{% trans %}Password{% endtrans %}</h1>
                             <form id="updatePassword" action="{{ baseUri }}/customer/my-account" method="POST" data-id="1">
                                 <!-- form spoofing -->
                                 <input type="hidden" name="action" value="update_password">
@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="form-group d-flex">
-                                    <button type="button" class="btn-form-change secondary-btn">{% trans %}Change{% endtrans %}</button>
+                                    <button type="button" class="btn-form-change secondary-btn contact-btn-send">{% trans %}Change{% endtrans %}</button>
                                     <button type="button" class="d-none btn-form-cancel primary-btn">{% trans %}Cancel{% endtrans %}</button>
                                     <button type="submit" class="d-none ml-3 btn-form-save blue-btn">{% trans %}Save{% endtrans %}</button>
                                 </div>
@@ -98,8 +98,8 @@
 
                         <!-- Contacts -->
                         <div class="col-12 mb-4">
-                            <h1 class="profile-header mb-3">{% trans %}Contacts{% endtrans %}</h1>
-                            <button type="button" data-form="add_contact" data-modal="modal_form_contact" class="btn-add-data secondary-btn">{% trans %}Add{% endtrans %}</button>
+                            <h1 class="profile-header mb-3 blue-color">{% trans %}Contacts{% endtrans %}</h1>
+                            <button type="button" data-form="add_contact" data-modal="modal_form_contact" class="btn-add-data secondary-btn contact-btn-send">{% trans %}Add{% endtrans %}</button>
 
                             <div class="row mt-3">
                                 {% for key, contactType in colCustomerContact %}
@@ -140,7 +140,7 @@
                                                     {% trans %}Cancel{% endtrans %}
                                                 </span>
                                                 <input type="submit" id="update_contact_{{ loop.index }}" class="blue-btn btn-form-save d-none float-right" data-loading-text="{% trans %}Saving{% endtrans %}" value="{% trans %}Save{% endtrans %}">
-                                                <button type="button" class="btn-form-edit secondary-btn">{% trans %}Edit{% endtrans %}</button>
+                                                <button type="button" class="btn-form-edit secondary-btn contact-btn-send">{% trans %}Edit{% endtrans %}</button>
                                             </div>
                                         </form>
                                     </div>
@@ -152,41 +152,71 @@
                         <!-- Address -->
 
                         <div class="col-12 mb-4">
-                            <h1 class="profile-header mb-3">{% trans %}Address{% endtrans %}</h1>
-                            <button type="button" data-form="add_address" data-modal="modal_form_address" class="btn-add-data secondary-btn">{% trans %}Add{% endtrans %}</button>
+                            <h1 class="profile-header mb-3 blue-color">{% trans %}Address{% endtrans %}</h1>
+                            <button type="button" data-form="add_address" data-modal="modal_form_address" class="btn-add-data secondary-btn contact-btn-send">{% trans %}Add{% endtrans %}</button>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col">
+                        <div class="col-12 mt-3">
+                            <div class="row justify-content-between">
                                 {% set baseCountryId = LayoutFunctions.getEnvVars('BASE_COUNTRY_ID') %}
 
                                 {% for address in colCustomerAddress ?? [] %}
                                     {% set disabled = address.country == baseCountryId ? '' : 'disabled' %}
                                     {% set hidden = address.country == baseCountryId ? '' : 'd-none' %}
-                                    {%if loop.index > 1 %}
-                                        <div class="form-group form-title text-center mt-4 p-1 address-{{address.id}}">
-                                            <span class="lh-31px">{% trans %}Update your Address{%endtrans%}</span>
-                                        </div>
+                                    {% if loop.index > 1 %}
+                                        <hr>
+                                        {#<div class="form-group form-title text-center mt-4 p-1 address-{{address.id}}">
+                                            <span class="lh-31px">{% trans %}Update your Address{% endtrans %}</span>
+                                        </div>#}
                                     {% endif %}
+                                    <div class="col-12 col-md-5 col-lg-5 m-4 my-account-address-style">
+                                   
+                                          {#<sup class="badge badge-info counter-registries address-{{address.id}} bg-blue-color">{{loop.index}}</sup>#}
+                                    <div class="row justify-content-between pb-2"> 
+                                        <span class='blue-color font-weight-bold'>{{arCustomer.name}}</span>
+                                        <div >
+                                    <a class="btn address-edit-click blue-color"><i class="mdi mdi-18px mdi-pencil blue-color"></i> Editar </a>
+                                    <a class="btn address-edit-remove blue-color"><i class="mdi mdi-18px mdi-trash-can-outline blue-color"></i> Remover </a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <span class="blue-color">{{arCustomer.taxNumber}}<span>
+                                    </div>
 
-                                    <sup class="badge badge-info counter-registries address-{{address.id}}">{{loop.index}}</sup>
-
-                                    <form class="update-address address-{{address.id}}" action="/customer/my-account" method="POST" data-id="{{ address.id }}">
+                                    <div class="row">
+                                        <span class="blue-color">
+                                            {% if address.line1|length > 1 %}
+                                                {{address.line1}},
+                                            {%  endif %}
+                                            {% if address.line2|length > 1 %}
+                                                {{address.line2}},
+                                            {%  endif %}
+                                            {% if address.postalCode|length > 1 %}
+                                                {{address.postalCode}},
+                                            {%  endif %}
+                                             {% if address.city|length > 1 %}
+                                                {{address.city}}
+                                            {%  endif %}
+                                           
+                                        </span>
+                                    </div>
+                                    
+                                    <form class="update-address address-{{address.id}}" action="/customer/my-account" method="POST" data-id="{{ address.id }}" style="display:none;">
                                         <input type="hidden" name="addressId" value="{{ address.id }}">
                                         <input type="hidden" name="action" value="update_address">
                                         <div class="row justify-content-center">
-                                            <div class="col-12 col-lg-4 col-md-6">
+                                            <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="line1">{% trans %}Line1{% endtrans %}: *</label><br>
                                                     <input type="text" required name="line1" value="{{ address.line1 ?? '' }}" placeholder="{% trans %}Line1{% endtrans %}" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-lg-4 col-md-6">
+                                            <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="line2">{% trans %}Line2{% endtrans %}:</label><br>
                                                     <input type="text" name="line2" value="{{ address.line2 ?? '' }}" placeholder="{% trans %}Line2{% endtrans %}" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-lg-4 col-md-6">
+                                            <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="country">{% trans %}Country{% endtrans %}:</label><br>
                                                     <select name="country" class="form-control geo-countries form-select2">
@@ -196,13 +226,13 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-lg-4 col-md-6">
+                                            <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="postalCode">{% trans %}Postal Code{% endtrans %}: *</label><br>
                                                     <input type="text" required name="postalCode" value="{{ address.postalCode ?? '' }}" placeholder="{% trans %}Postal Code{% endtrans %}" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-lg-4 col-md-6">
+                                            <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="state">{% trans %}State{% endtrans %}: *</label><br>
                                                     <select name="state" class="form-control geo-pt-district form-select2 border-0 {{ hidden }}" {{ disabled }}>
@@ -213,7 +243,7 @@
                                                     <input {{ disabled ? '' : 'disabled' }} type="text" name="state" value="{{ address.state ?? ''}}" placeholder="{% trans %}State{% endtrans %}" class="form-control geo-pt-district {{ hidden ? '' : 'd-none' }}">
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-lg-4 col-md-6">
+                                            <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="city">{% trans %}City{% endtrans %}: *</label><br>
                                                     <select name="city" class="border-0 form-control geo-pt-council form-select2 {{ hidden }}" {{ disabled }}>
@@ -224,7 +254,7 @@
                                                     <input {{ disabled ? '' : 'disabled' }} type="text" required name="city" value="{{ address.city ?? '' }}" placeholder="{% trans %}City{% endtrans %}" class="geo-pt-council form-control {{ hidden ? '' : 'd-none' }}">
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-lg-4 col-md-6">
+                                            <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="addressType">{% trans %}Address Type{% endtrans %}:</label><br>
                                                     <select name="addressType" class="form-control border-0">
@@ -242,9 +272,9 @@
                                             </div>
                                             <div class="col-12 col-lg-12">
                                                 <div class="text-center mx-auto">
-                                                    <button type="button" class="btn-form-edit secondary-btn">{%trans%}Edit{%endtrans%}</button>
+                                                    <button type="button" class="btn-form-edit secondary-btn contact-btn-send">{%trans%}Edit{%endtrans%}</button>
                                                     <div class="btn-group float-left">
-                                                        <span value="{%trans%}Cancel{%endtrans%}" class="float-left btn btn-secondary btn-form-cancel d-none">{% trans %}Cancel{% endtrans %}</span>
+                                                        <span value="{%trans%}Cancel{%endtrans%}" class="cancel-address-edit float-left btn btn-secondary btn-form-cancel d-none">{% trans %}Cancel{% endtrans %}</span>
                                                         <span data-id='{{ address.id }}' data-action="address" class="btn btn-danger btn-form-delete d-none">{% trans %}Delete{% endtrans %}</span>
                                                     </div>
                                                     <button class="btn-form-save d-none float-right blue-btn">{%trans%}Save{%endtrans%}</button>
@@ -252,6 +282,8 @@
                                             </div>
                                         </div>
                                     </form>
+
+                                    </div>
                                 {% endfor %}
                             </div>
                         </div>
@@ -264,6 +296,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+
     <!-- Add Contacts -->
     <div class="modal fade" id="modal_form" aria-modal="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -528,11 +561,40 @@
     </div>
     <!-- /Delete -->
     {% endblock %}
-
     <script src="/assets/js/customer/querybiz-customer-my-account.js"></script>
     <script>
 
         $(document).ready(function() {
+            //code 14141
+            $('.cancel-address-edit').on('click', function(){
+                console.log("ola");
+            });
+
+            $('.address-edit-click').on('click',function(){
+               if($(this).parent().parent().parent().children('.update-address').css('display')=='none'){
+               
+
+                $(this).parent().parent().parent().children('.update-address').slideDown();
+                console.log($(this).parent().parent().parent().find('.btn-form-edit'));
+                $(this).parent().parent().parent().find('.btn-form-edit').trigger('click')
+
+
+              
+            }
+            else{
+                $(this).parent().parent().parent().children('.update-address').slideUp();
+            }
+
+            });
+
+            //code 14141
+            $('.address-edit-remove').on('click',function(){
+                $(this).parent().parent().parent().find('.btn-form-delete').click();
+            });
+
+
+
+ 
             $('.form-select2').select2();
             var options = {
                 'successMessage': '{% trans %}Data Updated{% endtrans %}',

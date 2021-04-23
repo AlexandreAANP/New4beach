@@ -551,6 +551,11 @@ color: white !important;
 .btn-outline-info:hover{
 	background-color: #1b3c7e !important;
 }
-..btn-group-vertical .btn.active{
+.btn-group-vertical .btn.active{
 	border:none !important;
+}
+.my-account-address-style{
+	    background-color: white;
+    border-radius: 17px;
+    padding: 12px 25px 40px 25px;
 }
