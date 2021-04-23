@@ -1,0 +1,32 @@
+<section id="slider">
+    <div class="full-container">
+        <div>
+            <div>
+                <div id="home-slider" class="smaller-slider">
+                    {% for richmedia in colRichmedia %}
+                        <div>
+                            <div class="slider-content">
+                                <div class="slider-image d-lg-none" style="background-image: url('{{ richmedia.filename }}');"></div>
+                                <div class="slider-image d-none d-lg-block" style="background-image: url('{{ richmedia.filename }}');"></div>
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-11 d-flex align-items-start flex-column mx-auto">
+                                            <b><p class="slider-product-offer">{{ richmedia.title }}</p></b>
+                                            <b><p class="slider-product-name mt-1">{{ richmedia.description }}</p></b>
+                                            <div class="mt-4">
+                                                {% if richmedia.url != '' %}
+                                                    <a href="{{ baseUri }}/{{ richmedia.url }}" class="blue-btn" title="{% trans %}Know more{% endtrans %}">{% trans %}Know more{% endtrans %}</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
