@@ -168,36 +168,49 @@
                                             <span class="lh-31px">{% trans %}Update your Address{% endtrans %}</span>
                                         </div>#}
                                     {% endif %}
-                                    <div class="col-12 col-md-5 col-lg-5 m-4 my-account-address-style">
+                                    <div class="col-12 col-lg-6 mb-4">
                                    
                                           {#<sup class="badge badge-info counter-registries address-{{address.id}} bg-blue-color">{{loop.index}}</sup>#}
-                                    <div class="row justify-content-between pb-2"> 
+                                    <div class="my-account-address-style">
+
+                                    <div class="row justify-content-between"> 
                                         <span class='blue-color font-weight-bold'>{{arCustomer.name}}</span>
-                                        <div >
-                                    <a class="btn address-edit-click blue-color"><i class="mdi mdi-18px mdi-pencil blue-color"></i> Editar </a>
-                                    <a class="btn address-edit-remove blue-color"><i class="mdi mdi-18px mdi-trash-can-outline blue-color"></i> Remover </a>
+                                        <div>
+                                        <a class="btn address-edit-click blue-color"><i class="mdi mdi-18px mdi-pencil blue-color"></i> Editar </a>
+                                        <a class="btn address-edit-remove blue-color"><i class="mdi mdi-18px mdi-trash-can-outline blue-color"></i> Remover </a>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row pb-2">
                                         <span class="blue-color">{{arCustomer.taxNumber}}<span>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row pb-2 justify-content-between">
                                         <span class="blue-color">
+                                            <span class='address-line1'> 
                                             {% if address.line1|length > 1 %}
-                                                {{address.line1}},
+                                               {{address.line1}},
                                             {%  endif %}
+                                            </span>
+                                            <span class='address-line2'> 
                                             {% if address.line2|length > 1 %}
                                                 {{address.line2}},
                                             {%  endif %}
+                                            </span>
+
+                                                <span class='address-postalCode'>
                                             {% if address.postalCode|length > 1 %}
-                                                {{address.postalCode}},
+                                             {{address.postalCode}},
                                             {%  endif %}
-                                             {% if address.city|length > 1 %}
-                                                {{address.city}}
-                                            {%  endif %}
+                                            </span>
+
+                                            <span class='address-city'>
+                                                {% if address.city|length > 1 %}
+                                                    {{address.city}}
+                                                {%  endif %}
+                                            </span>
                                            
                                         </span>
+                                        <span class='ml-auto p-2 address-isnt-saved d-none'><i class="mdi mdi-18px mdi-information-outline"></i>Informação não salva!</span>
                                     </div>
                                     
                                     <form class="update-address address-{{address.id}}" action="/customer/my-account" method="POST" data-id="{{ address.id }}" style="display:none;">
@@ -275,14 +288,14 @@
                                                     <button type="button" class="btn-form-edit secondary-btn contact-btn-send">{%trans%}Edit{%endtrans%}</button>
                                                     <div class="btn-group float-left">
                                                         <span value="{%trans%}Cancel{%endtrans%}" class="cancel-address-edit float-left btn btn-secondary btn-form-cancel d-none">{% trans %}Cancel{% endtrans %}</span>
-                                                        <span data-id='{{ address.id }}' data-action="address" class="btn btn-danger btn-form-delete d-none">{% trans %}Delete{% endtrans %}</span>
+                                                        <span data-id='{{ address.id }}' data-action="address" class="delete-address-edit btn btn-danger btn-form-delete d-none">{% trans %}Delete{% endtrans %}</span>
                                                     </div>
                                                     <button class="btn-form-save d-none float-right blue-btn">{%trans%}Save{%endtrans%}</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
-
+                                    </div>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -566,31 +579,104 @@
 
         $(document).ready(function() {
             //code 14141
-            $('.cancel-address-edit').on('click', function(){
-                console.log("ola");
+
+            //click Cancel
+        $('.update-address').find('.btn-form-cancel').each(function(){
+            $(this).click(function(){
+               $(this).parents().eq(6).find('.update-address').slideUp();
             });
-
-            $('.address-edit-click').on('click',function(){
-               if($(this).parent().parent().parent().children('.update-address').css('display')=='none'){
-               
-
-                $(this).parent().parent().parent().children('.update-address').slideDown();
-                console.log($(this).parent().parent().parent().find('.btn-form-edit'));
-                $(this).parent().parent().parent().find('.btn-form-edit').trigger('click')
+        });
 
 
-              
+
+
+
+        //click Remover
+
+        $('.address-edit-remove').click(function(){
+            console.log($(this).parents().eq(2));
+            $(this).parents().eq(2).find('.delete-address-edit').trigger('click');
+        });
+
+
+
+        //click Save
+        $('.btn-form-save').click(function(){
+             $(this).parents().eq(6).find('.address-isnt-saved').addClass('d-none');
+        })
+
+        //click EDITAR 
+
+
+      $('.address-edit-click').click(function(){
+
+        console.log($(this).parents().eq(2));
+
+        if($(this).parents().eq(2).find('.update-address').css('display')=='none'){
+            
+            $(this).parents().eq(2).find('.btn-form-edit').trigger('click');
+            $(this).parents().eq(2).find('.update-address').slideDown();
+            $(this).parents().eq(2).find('.address-isnt-saved').removeClass('d-none');
+        }
+        else{
+            console.log("subiu");
+            $(this).parents().eq(2).find('.update-address').slideUp();
+        }
+
+      });
+
+      //each input form
+      //line1
+      $('.update-address').find("input[name='line1']").each(function(){
+        $(this).keyup(function(){
+            if($(this).parents().eq(5).find('.address-line1').text()==''||$(this).parents().eq(5).find('.address-line1').text()==','){
+            $(this).parents().eq(5).find('.address-line1').text($(this).val());
             }
             else{
-                $(this).parent().parent().parent().children('.update-address').slideUp();
+                $(this).parents().eq(5).find('.address-line1').text($(this).val()+',');
             }
+        });
+      });
 
-            });
-
-            //code 14141
-            $('.address-edit-remove').on('click',function(){
-                $(this).parent().parent().parent().find('.btn-form-delete').click();
-            });
+      //line2
+      $('.update-address').find("input[name='line2']").each(function(){
+        $(this).keyup(function(){
+            if($(this).parents().eq(5).find('.address-line2').text()==''||$(this).parents().eq(5).find('.address-line2').text()==','){
+            $(this).parents().eq(5).find('.address-line2').text($(this).val());
+            }
+            else{
+                $(this).parents().eq(5).find('.address-line2').text($(this).val()+',');
+            }
+        });
+      });
+      //Postal Code
+      $('.update-address').find("input[name='postalCode']").each(function(){
+        $(this).keyup(function(){
+            if($(this).parents().eq(5).find('.address-postalCode').text()==''||$(this).parents().eq(5).find('.address-postalCode').text()==','){
+            $(this).parents().eq(5).find('.address-postalCode').text($(this).val());
+            }
+            else{
+                $(this).parents().eq(5).find('.address-postalCode').text($(this).val()+',');
+            }
+        });
+      });
+      //city
+      $('.update-address').find("input[name='city']").each(function(){
+        $(this).keyup(function(){
+            if($(this).parents().eq(5).find('.address-city').text()==''||$(this).parents().eq(5).find('.address-city').text()==','){
+            $(this).parents().eq(5).find('.address-city').text($(this).val());
+            }
+            else{
+                $(this).parents().eq(5).find('.address-city').text($(this).val()+'.');
+            }
+        });
+      });
+      //city select
+      $('.update-address').find("select[name='city']").each(function(){
+        $(this).change(function(){
+            $(this).parents().eq(5).find('.address-city').text($(this).val());
+        });
+      });
 
 
 

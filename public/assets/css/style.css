@@ -555,7 +555,14 @@ color: white !important;
 	border:none !important;
 }
 .my-account-address-style{
+	border: 1px solid #c1c1c1;
 	    background-color: white;
     border-radius: 17px;
     padding: 12px 25px 40px 25px;
+}
+.address-isnt-saved{
+	color: #1b3c7e !important;
+}
+.address-isnt-saved i {
+	color: #1b3c7e !important;
 }
