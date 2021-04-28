@@ -187,30 +187,30 @@
                                     <div class="row pb-2 justify-content-between">
                                         <span class="blue-color">
                                             <span class='address-line1'> 
-                                            {% if address.line1|length > 1 %}
+                                            {% if address.line1|length > 0 %}
                                                {{address.line1}},
                                             {%  endif %}
                                             </span>
                                             <span class='address-line2'> 
-                                            {% if address.line2|length > 1 %}
+                                            {% if address.line2|length > 0 %}
                                                 {{address.line2}},
                                             {%  endif %}
                                             </span>
 
                                                 <span class='address-postalCode'>
-                                            {% if address.postalCode|length > 1 %}
+                                            {% if address.postalCode|length > 0 %}
                                              {{address.postalCode}},
                                             {%  endif %}
                                             </span>
 
                                             <span class='address-city'>
-                                                {% if address.city|length > 1 %}
+                                                {% if address.city|length > 0 %}
                                                     {{address.city}}
                                                 {%  endif %}
                                             </span>
                                            
                                         </span>
-                                        <span class='ml-auto p-2 address-isnt-saved d-none'><i class="mdi mdi-18px mdi-information-outline"></i>Informação não salva!</span>
+                                        <span class='ml-auto p-2 address-isnt-saved d-none'><i class="mdi mdi-18px mdi-information-outline"></i> {% trans %}Unsaved information{% endtrans %}!</span>
                                     </div>
                                     
                                     <form class="update-address address-{{address.id}}" action="/customer/my-account" method="POST" data-id="{{ address.id }}" style="display:none;">
@@ -578,108 +578,6 @@
     <script>
 
         $(document).ready(function() {
-            //code 14141
-
-            //click Cancel
-        $('.update-address').find('.btn-form-cancel').each(function(){
-            $(this).click(function(){
-               $(this).parents().eq(6).find('.update-address').slideUp();
-            });
-        });
-
-
-
-
-
-        //click Remover
-
-        $('.address-edit-remove').click(function(){
-            console.log($(this).parents().eq(2));
-            $(this).parents().eq(2).find('.delete-address-edit').trigger('click');
-        });
-
-
-
-        //click Save
-        $('.btn-form-save').click(function(){
-             $(this).parents().eq(6).find('.address-isnt-saved').addClass('d-none');
-        })
-
-        //click EDITAR 
-
-
-      $('.address-edit-click').click(function(){
-
-        console.log($(this).parents().eq(2));
-
-        if($(this).parents().eq(2).find('.update-address').css('display')=='none'){
-            
-            $(this).parents().eq(2).find('.btn-form-edit').trigger('click');
-            $(this).parents().eq(2).find('.update-address').slideDown();
-            $(this).parents().eq(2).find('.address-isnt-saved').removeClass('d-none');
-        }
-        else{
-            console.log("subiu");
-            $(this).parents().eq(2).find('.update-address').slideUp();
-        }
-
-      });
-
-      //each input form
-      //line1
-      $('.update-address').find("input[name='line1']").each(function(){
-        $(this).keyup(function(){
-            if($(this).parents().eq(5).find('.address-line1').text()==''||$(this).parents().eq(5).find('.address-line1').text()==','){
-            $(this).parents().eq(5).find('.address-line1').text($(this).val());
-            }
-            else{
-                $(this).parents().eq(5).find('.address-line1').text($(this).val()+',');
-            }
-        });
-      });
-
-      //line2
-      $('.update-address').find("input[name='line2']").each(function(){
-        $(this).keyup(function(){
-            if($(this).parents().eq(5).find('.address-line2').text()==''||$(this).parents().eq(5).find('.address-line2').text()==','){
-            $(this).parents().eq(5).find('.address-line2').text($(this).val());
-            }
-            else{
-                $(this).parents().eq(5).find('.address-line2').text($(this).val()+',');
-            }
-        });
-      });
-      //Postal Code
-      $('.update-address').find("input[name='postalCode']").each(function(){
-        $(this).keyup(function(){
-            if($(this).parents().eq(5).find('.address-postalCode').text()==''||$(this).parents().eq(5).find('.address-postalCode').text()==','){
-            $(this).parents().eq(5).find('.address-postalCode').text($(this).val());
-            }
-            else{
-                $(this).parents().eq(5).find('.address-postalCode').text($(this).val()+',');
-            }
-        });
-      });
-      //city
-      $('.update-address').find("input[name='city']").each(function(){
-        $(this).keyup(function(){
-            if($(this).parents().eq(5).find('.address-city').text()==''||$(this).parents().eq(5).find('.address-city').text()==','){
-            $(this).parents().eq(5).find('.address-city').text($(this).val());
-            }
-            else{
-                $(this).parents().eq(5).find('.address-city').text($(this).val()+'.');
-            }
-        });
-      });
-      //city select
-      $('.update-address').find("select[name='city']").each(function(){
-        $(this).change(function(){
-            $(this).parents().eq(5).find('.address-city').text($(this).val());
-        });
-      });
-
-
-
  
             $('.form-select2').select2();
             var options = {

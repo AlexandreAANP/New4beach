@@ -8,11 +8,11 @@
             {'product-cart': 'Cart'}
         ]
     })}}
-
-    <div class="container mb-5">
+<section class="background-section-image">
+    <div class="container pb-5">
         <div class="row">
             <div class="col-12 col-lg-8">
-                <div class="cart-box">
+                <div class="cart-box bg-color-white">
                     {% set totalProductItems = 0 %}
                     {% set isAllowedQuantity = false %}
 
@@ -94,7 +94,7 @@
             </div>
         </div>
     </div>
-
+</section>
 {% endblock %}
 
 {% block javascripts %}

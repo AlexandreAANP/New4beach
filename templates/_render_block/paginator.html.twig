@@ -11,14 +11,14 @@
 </nav>#}
 
 {% if (arPagination.currentPage is defined) and (arPagination.currentPage > 0) %}
-    <nav>
+    <nav class="pt-5 pb-2">
         <ul class="pagination">
             {% if (arPagination.currentPage is defined) and (arPagination.currentPage > 1) %}
                 <li class="page-item"><a href="{{ baseUri }}/product/{{ productType }}/1" class="page-link"><i class='fas fa-angle-double-left'></i></a></li>
             {% endif %}
 
             {% if (arPagination.currentPage is defined) and (arPagination.currentPage > 1) %}
-                <li class="page-item"><a href="{{ baseUri }}/product/{{ productType }}/{{ (arPagination.currentPage - 1) }}" class="page-link paginator-btn-ant-seg">{#<i class='fas fa-angle-left'></i>#}Ant</a></li>
+                <li class="page-item"><a href="{{ baseUri }}/product/{{ productType }}/{{ (arPagination.currentPage - 1) }}" class="page-link paginator-btn-ant-seg">{#<i class='fas fa-angle-left'></i>#}{% trans %}Previus{% endtrans %}</a></li>
             {% endif %}
 
             {% for key in 1..arPagination.pages %}
@@ -78,7 +78,7 @@
 
             <li class="page-item">
                 {% if (arPagination.currentPage is defined) and (arPagination.currentPage < arPagination.pages) %}
-            <li class="page-item"><a href="{{ baseUri }}/product/{{ productType }}/{{ (arPagination.currentPage + 1) }}" class="page-link paginator-btn-ant-seg">Seg{#<i class='fas fa-angle-right'></i>#}</a></li>
+            <li class="page-item"><a href="{{ baseUri }}/product/{{ productType }}/{{ (arPagination.currentPage + 1) }}" class="page-link paginator-btn-ant-seg">{% trans %}Next{% endtrans %}{#<i class='fas fa-angle-right'></i>#}</a></li>
                 {% endif %}
 
                 {% if (arPagination.currentPage is defined) and (arPagination.currentPage < arPagination.pages) %}

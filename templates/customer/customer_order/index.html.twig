@@ -85,25 +85,30 @@
 
                     <!-- start orders-->
                     <div class="row pt-3 pb-3 text-left">
-
                         {% for order in orders.colOrders|reverse %}
 
                             <div class="col-12 _col-lg-4 _col-md-6 mb-3">
                                 <div class="card p-1 bg-eee">
                                     <form name="orderDetails" action="/customer/order-details" method="POST">
-                                        <b>{%trans%}Order{%endtrans%}</b>
-                                        <span class="btn-view-order text-info cursor-pointer">
-                                            <b>#{{order.orderInfoId}}</b>
-                                        </span>
-                                        <input type="hidden" name="id" value="{{order.orderInfoId}}">
-                                        <span class="float-right">
-                                            <b>{%trans%}Date{%endtrans%} </b>{{order.dateInserted|date("Y-m-d")}}
-                                        </span>
+                                    <div class="container row justify-content-between py-2">
+                                        <div class="col-6 blue-color">
+                                            <b class="blue-color">{%trans%}Order{%endtrans%}</b>
+                                            <span class="btn-view-order text-info cursor-pointer blue-color hover-underline">
+                                                #{{order.orderInfoId}}
+                                            </span>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="hidden" name="id" value="{{order.orderInfoId}}">
+                                            <span class="float-right blue-color">
+                                                <b class="blue-color">{%trans%}Date{%endtrans%} </b>{{order.dateInserted|date("Y-m-d")}}
+                                            </span>
+                                        </div>
+                                    </div>
                                     </form>
 
-                                    <div class="d-block">
+                                    <div class="d-block container row">
                                         {# Review only possible in this cases #}
-                                        {% if (order.orderStatus.isPaymentCompleted ?? 0) or (order.orderStatus.referenceKey ?? null )  == 'order-status-completed' %}
+                                        {#{% if (order.orderStatus.isPaymentCompleted ?? 0) or (order.orderStatus.referenceKey ?? null )  == 'order-status-completed' %}
 
                                             <form class="float-left" action="/customer/review/" method="post">
                                                 <input type="hidden" name="id" value="{{order.orderInfoId}}">
@@ -119,10 +124,10 @@
                                                 <b>{%trans%}Review{%endtrans%}</b>
                                             </button>
 
-                                        {% endif %}
+                                        {% endif %}#}
 
-                                        <span class="float-right">
-                                            <b>{%trans%}Status{%endtrans%}</b> {{order.orderStatus.frontofficeName}}
+                                        <span class="float-right blue-color col py-2">
+                                            <b class="blue-color">{%trans%}Status{%endtrans%}</b> {{order.orderStatus.frontofficeName}}
                                         </span>
                                     </div>
                                 </div>

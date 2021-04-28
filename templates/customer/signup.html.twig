@@ -36,8 +36,8 @@
                             <input type="text" name="name" id="name" class="form-control" tabIndex="1" autofocus required>
                         </div>
                         <div class="required-input w-100">
-                            <label for="last_name">{% trans %}Last name{% endtrans %}:</label>
-                            <input type="text" name="last_name" id="last_name" class="form-control" tabIndex="2">
+                            <label for="phone">{% trans %}Mobile{% endtrans %}:</label>
+                            <input type="text" name="phone" id="phone" class="form-control" tabIndex="2">
                         </div>
                         <div class="required-input w-100">
                             <label for="email">{% trans %}Email{% endtrans %}:</label>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="justify-content-center costumer-checkradio-Newsletter">
                         <center>
-                            <input type='checkbox'><span> Receber a Newsletter</span>
+                            <!--<input type='checkbox'><span> Receber a Newsletter</span>-->
                         </center>
                         </div>
                         <h2 class="my-4 blue-color">{% trans %}Access Information{% endtrans %}</h2>
@@ -58,13 +58,13 @@
                             <input type="password" name="password_confirm" id="password_confirm" class="form-control" required tabIndex="5">
                         </div>
 
-                        <!-- reCAPTCHA -->
+                        <!-- reCAPTCHA 
                         <div class="d-block w-100 text-center">
                             <div class="d-inline-block">
                                 <div id="recaptcha_html_element"></div>
                             </div>
-                        </div>
-                        <!-- /reCAPTCHA -->
+                        </div
+                         /reCAPTCHA -->
 
                         <div>
                             <button type="submit" id="form_customer_signup_submit" class="login-btn mt-4 login-btn-criar-conta" tabIndex="6">
@@ -97,11 +97,11 @@
     </script>
 
     <script type="text/javascript">
-        var onloadCallback = function () {
+      /*  var onloadCallback = function () {
             grecaptcha.render('recaptcha_html_element', {
                 'sitekey': '{{ LayoutFunctions.getSettingsVars('GOOGLE_CAPTCHA_PUBLIC_KEY_V2') }}'
             });
-        };
+        };*/
     </script>
 
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>

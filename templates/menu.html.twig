@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg bg-primary flex-wrap pb-1 b-b">
+<nav class="navbar fixed-top navbar-expand-lg bg-primary flex-wrap py-2 b-b">
     <div class="container">
         <a href="/{{ app.request.getLocale() }}" title="{% trans %}Home{% endtrans %}">
             <img src="/assets/images/logo-4beach.png" style="width: 120px" alt="title="{% trans %}Home{% endtrans %}"">
@@ -46,7 +46,7 @@
                     </ul>
                 </li>
 
-                <li>
+                <li class='pt-1'>
                     <a href="{{ baseUri }}/product-cart" class="nav-link nav-link-warning" data-loading-text="{% trans %}Cart{% endtrans %} ({{ productItemsInCart }})">
                         <i class="mdi mdi-cart"></i>
                         <span class="warning bg-blue-color">{{ productItemsInCart ?? 0 }}</span>

@@ -123,6 +123,10 @@ var querybizCustomerMyAccount = {
             if(querybizCustomerMyAccount.checkEmptyFields(form)){
                 return false;
             }
+            
+             if(!querybizCustomerMyAccount.isValidPtPostalCode(form)){
+                return false;
+            }
 
             querybiz.post($(form), function(data) {
                 $.each($(form), function(key, val) {
@@ -199,6 +203,55 @@ var querybizCustomerMyAccount = {
             $(this).addClass('d-none');
             querybizCustomerMyAccount.toggleFormFields(form, false);
         });
+
+                    //code 14141
+            //click Cancel
+        $('.update-address').find('.btn-form-cancel').each(function(){
+            $(this).click(function(){
+               $(this).parents().eq(6).find('.update-address').slideUp();
+            });
+        });
+        //click Remover
+        $('.address-edit-remove').click(function(){
+            console.log($(this).parents().eq(2));
+            $(this).parents().eq(2).find('.delete-address-edit').trigger('click');
+        });
+        //click Save
+        $('.btn-form-save').click(function(){
+             $(this).parents().eq(6).find('.address-isnt-saved').addClass('d-none');
+             let line1 = $(this).parents().eq(3).find("input[name='line1']").val();
+             let line2 = $(this).parents().eq(3).find("input[name='line2']").val();
+             let postalCode = $(this).parents().eq(3).find("input[name='postalCode']").val();
+             let city = $(this).parents().eq(3).find("input[name='city']").val();
+             if(line1!=''){
+             $(this).parents().eq(5).find('.address-line1').text(line1+',');
+            }
+            if(line2!=''){
+             $(this).parents().eq(5).find('.address-line2').text(line2+',');
+             }
+             if(postalCode!=''){
+             $(this).parents().eq(5).find('.address-postalCode').text(postalCode+',');
+            }
+            if(city!=''){
+             $(this).parents().eq(5).find('.address-city').text(city+'.');
+            }
+        });
+        //click EDITAR 
+      $('.address-edit-click').click(function(){
+        if($(this).parents().eq(2).find('.update-address').css('display')=='none'){
+            
+            $(this).parents().eq(2).find('.btn-form-edit').trigger('click');
+            $(this).parents().eq(2).find('.update-address').slideDown();
+            $(this).parents().eq(2).find('.address-isnt-saved').removeClass('d-none');
+        }
+        else{
+            
+            $(this).parents().eq(2).find('.update-address').slideUp();
+        }
+
+      });
+
+
     },
 
     preventFormCancel: function(el) {
@@ -259,7 +312,7 @@ var querybizCustomerMyAccount = {
     },
 
     isValidPtPostalCode:function(form){
-
+        console.log("isValidPtPostalCode");
         $('.required').remove();
         isValid = true;
 

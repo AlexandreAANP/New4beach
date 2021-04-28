@@ -16,9 +16,11 @@
                     {% include '_render_block/simple-slider.html.twig' %}
 
                     {% if colProducts is defined and colProducts|length > 0 %}
-                        {% include '_render_block/products-header.html.twig' %}
 
+                        {% include '_render_block/products-header.html.twig' %}
+                        
                         <div class="row">
+
                             {% for product in colProducts %}
                                 <div class="col-12 col-lg-4">
                                     {% include '_render_block/product-card-rounded.html.twig' %}

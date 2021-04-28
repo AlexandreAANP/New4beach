@@ -28,7 +28,7 @@
         .select2-container .select2-selection--single .select2-selection__rendered {padding-left: 14px}
     </style>
 
-    <section id="orders">
+    <section id="orders" class="background-section-image m-0 py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
@@ -42,41 +42,86 @@
 
                     <div class="mb-5">
                         <h1 class="profile-header mb-3">{% trans %}Invoice Data{% endtrans %}</h1>
-                        <button type="button" class="btn-add-data secondary-btn">{% trans %}Add{% endtrans %}</button>
+                        <button type="button" class="btn-add-data secondary-btn bg-blue-color">{% trans %}Add{% endtrans %}</button>
                     </div>
 
                     <!-- start invoice data -->
-                    <div class="row justify-content-center">
-                        <div class="col-lg-12 col-s12">
+                    <div class="">
+                        <div class="row">
                             {% for invoice in customerInvoices ??[] %}
                                 {% set disabled = invoice.country == 177 ? '' : 'disabled' %}
                                 {% set hidden = invoice.country == 177 ? '' : 'd-none' %}
-                                {% if loop.index > 1 %}
+                                {#% if loop.index > 1 %}
 
                                     <div class="mt-5 mb-3 invoice-{{invoice.id}}">
                                         <h1 class="profile-header mb-3">{% trans %}Invoice Data{% endtrans %}</h1>
                                     </div>
 
-                                {% endif %}
-
+                                {% endif %#}
+                                {#}
                                 <sup class="badge badge-info counter-registries invoice-{{invoice.id}}">{{loop.index}}</sup>
-                                <form class="update-invoice invoice-{{invoice.id}}" action="/customer/my-account" method="POST" data-id="{{ invoice.id }}">
+                                    #}
+                                 <div class="col-12 col-lg-6 mb-4">
+
+                                <div class="my-account-address-style">
+                                 <div class="row justify-content-between"> 
+                                        <span class='name-to-invoice blue-color font-weight-bold'>{{invoice.nameToInvoice}}</span>
+                                        <div>
+                                        <a class="btn address-edit-click blue-color"><i class="mdi mdi-18px mdi-pencil blue-color"></i> Editar </a>
+                                        <a class="btn address-edit-remove blue-color"><i class="mdi mdi-18px mdi-trash-can-outline blue-color"></i> Remover </a>
+                                        </div>
+                                    </div>
+                                    <div class="row pb-2">
+                                        <span class="invoice-taxnumber blue-color">{{invoice.taxNumber}}<span>
+                                    </div>
+
+                                    <div class="row pb-2 justify-content-between">
+                                        <span class="blue-color">
+                                            <span class='invoice-line1'> 
+                                            {% if invoice.line1|length > 1 %}
+                                               {{invoice.line1}},
+                                            {%  endif %}
+                                            </span>
+                                            <span class='invoice-line2'> 
+                                            {% if invoice.line2|length > 1 %}
+                                                {{invoice.line2}},
+                                            {%  endif %}
+                                            </span>
+
+                                                <span class='invoice-postalCode'>
+                                            {% if invoice.postalCode|length > 1 %}
+                                             {{invoice.postalCode}},
+                                            {%  endif %}
+                                            </span>
+
+                                            <span class='invoice-city'>
+                                                {% if invoice.city|length > 1 %}
+                                                    {{invoice.city}}
+                                                {%  endif %}
+                                            </span>
+                                           
+                                        </span>
+                                        <span class='ml-auto p-2 invoice-isnt-saved d-none'><i class="mdi mdi-18px mdi-information-outline"></i> {% trans %}Unsaved Information{% endtrans %}!</span>
+                                    </div>
+
+                                <form class="update-invoice invoice-{{invoice.id}}" action="/customer/my-account" method="POST" data-id="{{ invoice.id }}" style="display: none;">
+
                                     <input type="hidden" name="invoiceId" value="{{ invoice.id }}">
                                     <input type="hidden" name="action" value="update_invoice">
                                     <div class="row justify-content-center">
-                                        <div class="col-12 col-lg-3 col-md-6">
+                                        <div class="col-12">
                                             <div class="form-group">
                                                 <label for="line1">{% trans %}Line1{% endtrans %}: *</label><br>
                                                 <input type="text" name="line1" required value="{{ invoice.line1 ?? '' }}" placeholder="{% trans %}Line1{% endtrans %}" class="border-0 form-control">
                                             </div>
                                         </div>
-                                        <div class="col-12 col-lg-3 col-md-6">
+                                        <div class="col-12">
                                             <div class="form-group">
                                                 <label for="line2">{% trans %}Line2{% endtrans %}:</label><br>
                                                 <input type="text" name="line2" value="{{ invoice.line2 ?? '' }}" placeholder="{% trans %}Line2{% endtrans %}" class="border-0 form-control">
                                             </div>
                                         </div>
-                                        <div class="col-12 col-lg-3 col-md-6">
+                                        <div class="col-12 col-lg-6">
                                             <div class="form-group">
                                                 <label for="country">{% trans %}Country{% endtrans %}:</label><br>
                                                 <select name="country" class="form-control geo-countries border-0 form-select2">
@@ -90,13 +135,13 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-lg-3 col-md-6">
+                                        <div class="col-12 col-lg-6">
                                             <div class="form-group">
                                                 <label for="postalCode">{% trans %}Postal Code{% endtrans %}: *</label><br>
                                                 <input type="text" name="postalCode" required value="{{ invoice.postalCode ?? ''}}" placeholder="{% trans %}Postal Code{% endtrans %}" class="border-0 form-control">
                                             </div>
                                         </div>
-                                        <div class="col-12 col-lg-3 col-md-6">
+                                        <div class="col-12 col-lg-6">
                                             <div class="form-group">
                                                 <label for="state">{% trans %}State{% endtrans %}: *</label><br>
                                                 <select name="state" class="form-control geo-pt-district border-0 {{hidden}} form-select2" {{disabled}}>
@@ -112,7 +157,7 @@
                                                 <input {{disabled ? '' : 'disabled'}} required type="text" name="state" value="{{ invoice.state }}" placeholder="{% trans %}State{% endtrans %}" class="border-0 form-control geo-pt-district {{hidden ? '' : 'd-none'}}">
                                             </div>
                                         </div>
-                                        <div class="col-12 col-lg-3 col-md-6">
+                                        <div class="col-12 col-lg-6">
                                             <div class="form-group">
                                                 <label for="city">{% trans %}City{% endtrans %}: *</label><br>
                                                 <select name="city" class="border-0 form-control geo-pt-council {{hidden}} form-select2" {{disabled}}>
@@ -127,13 +172,13 @@
                                                 <input {{disabled ? '' : 'disabled'}} required type="text" name="city" value="{{ invoice.city ?? '' }}" placeholder="{% trans %}City{% endtrans %}" class="geo-pt-council border-0 form-control {{hidden ? '' : 'd-none'}}">
                                             </div>
                                         </div>
-                                        <div class="col-12 col-lg-3 col-md-6">
+                                        <div class="col-12">
                                             <div class="form-group">
                                                 <label for="taxNumber">{% trans %}Tax Number{% endtrans %}: *</label><br>
                                                 <input type="text" required name="taxNumber" value="{{ invoice.taxNumber ?? '' }}" placeholder="{% trans %}Tax Number{% endtrans %}" class="border-0 form-control">
                                             </div>
                                         </div>
-                                        <div class="col-12 col-lg-3 col-md-6">
+                                        <div class="col-12">
                                             <div class="form-group">
                                                 <label for="nameToInvoice">{% trans %}Name To Invoice{% endtrans %}:</label><br>
                                                 <input type="text" name="nameToInvoice" value="{{ invoice.nameToInvoice ?? ''}}" placeholder="{% trans %}Name To Invoice{% endtrans %}" class="border-0 form-control">
@@ -154,7 +199,7 @@
 
                                         <div class="col-12 col-lg-12">
                                             <div class="text-center">
-                                                <button type="button" class="btn-edit secondary-btn">{%trans%}Edit{%endtrans%}</button>
+                                                <button type="button" class="btn-form-edit btn-edit secondary-btn bg-blue-color">{%trans%}Edit{%endtrans%}</button>
                                                 <div class="btn-group float-left">
                                                 <button type="button" class="float-left primary-btn btn-cancel d-none">
                                                     {%trans%}Cancel{%endtrans%}
@@ -162,17 +207,18 @@
 
                                                     {% if loop.index > 1 %}
 
-                                                        <span class="btn btn-danger btn-delete d-none">{%trans%}Delete{%endtrans%}</span>
+                                                        <span class="delete-address-edit btn btn-danger btn-delete d-none">{%trans%}Delete{%endtrans%}</span>
 
                                                     {% endif %}
 
                                                 </div>
-                                                <button type="submit" class="blue-btn btn-save d-none float-right">{%trans%}Save{%endtrans%}</button>
+                                                <button type="submit" class="btn-form-save blue-btn btn-save d-none float-right">{%trans%}Save{%endtrans%}</button>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
-
+                            </div>
+                        </div>
                             {% endfor %}
 
                         </div>

@@ -566,3 +566,15 @@ color: white !important;
 .address-isnt-saved i {
 	color: #1b3c7e !important;
 }
+.bg-color-white{
+	background-color: white !important;
+}
+.bg-color-red{
+	background-color: #d21113 !important;
+}
+.hover-underline:hover{
+	text-decoration: underline;
+}
+.pagination .page-link{
+	border-radius: 35px !important;
+}

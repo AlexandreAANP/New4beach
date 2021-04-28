@@ -15,19 +15,19 @@
         ]
     }) }}
 
-    <section id="shopping">
-        <div class="container">
-            <div class="row">
+    <section id="shopping" class="background-section-image m-0 py-5">
+        <div class="container d-flex justify-content-center">
+            <div class="col-9 py-3 bg-color-white border rounded">
                 <div class="col-12 d-flex align-items-center flex-column text-center">
                     <img src="/assets/images/shopping-finish.svg" alt="">
-                    <h1>{% trans %}Thank You!{% endtrans %}</h1>
-                    <p>
+                    <h1 class="blue-color">{% trans %}Thank You!{% endtrans %}</h1>
+                    <p class="blue-color">
                         {% trans %}Your order was registered successfully{% endtrans %}
                         <br/>
                         {% trans %}Order Code{% endtrans %}: {{ orderInfoId }}
                     </p>
                     <p>
-                        <small class="d-none">
+                        <small class="">
                             <i class="mdi mdi-file-document"></i>
                             Após o pedido ser despachado, a fatura é enviada para o seu
                             ID de e-mail registado.
@@ -38,7 +38,7 @@
                         </small>
                     </p>
                     {% if (customerId is defined) and (customerId > 0) %}
-                        <a href="{{ baseUri }}/customer" class="sign_in secondary-btn continue-shopping">{% trans %}My Area{% endtrans %}</a>
+                        <a href="{{ baseUri }}/customer" class="sign_in secondary-btn continue-shopping mb-5 bg-blue-color">{% trans %}My Area{% endtrans %}</a>
                     {% else %}
                         <a href="#" id="btnLogin" class="sign_in join_now js-modal-show secondary-btn continue-shopping">{% trans %}Log In{% endtrans %}</a>
                     {% endif %}

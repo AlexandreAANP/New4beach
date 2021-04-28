@@ -10,7 +10,7 @@
 <div class="background-section-image">
     <section class="container section-min-height">
 
-        <div class="container mt-5">
+        {#<div class="container mt-5">
             {% set arContent = LayoutFunctions.getAPI('content/pages-contact-us?language=' ~ app.request.getLocale()) %}
             {% if arContent is defined and arContent is iterable and arContent|length > 0%}
                 {% if arContent.title is defined and arContent.title != '' %}
@@ -23,7 +23,7 @@
             {% else %}
                 <h1 class="text-center mt-5">{% trans %}CONTACT{% endtrans %}</h1>
             {% endif %}
-        </div>
+        </div>#}
 
            {{ include('_includes/breadcrumb.html.twig', {
         'path': [

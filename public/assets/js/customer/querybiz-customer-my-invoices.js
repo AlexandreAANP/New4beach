@@ -109,6 +109,7 @@ var querybizCustomerMyInvoices = {
                     elMsg.removeClass('alert-danger, font-weight-bold');
                 });
             });
+            $(this).parents().eq(5).find('.update-invoice').slideUp();
         });
 
         $('.btn-new-data').click(function(){
@@ -191,6 +192,59 @@ var querybizCustomerMyInvoices = {
                 });
             });
         });
+
+                //code 14141
+            //click Cancel
+        $('.update-invoice').find('.btn-form-cancel').each(function(){
+            $(this).click(function(){
+               $(this).parents().eq(6).find('.update-invoice').slideUp();
+            });
+        });
+        //click Remover
+        $('.address-edit-remove').click(function(){
+            console.log($(this).parents().eq(2));
+            $(this).parents().eq(2).find('.delete-address-edit').trigger('click');
+        });
+        //click Save
+        $('.btn-form-save').click(function(){
+             $(this).parents().eq(5).find('.invoice-isnt-saved').addClass('d-none');
+              let line1 = $(this).parents().eq(4).find("input[name='line1']").val();
+             let line2 = $(this).parents().eq(4).find("input[name='line2']").val();
+             let postalCode = $(this).parents().eq(4).find("input[name='postalCode']").val();
+             let city = $(this).parents().eq(4).find("input[name='city']").val();
+             let taxNumber = $(this).parents().eq(4).find("input[name='taxNumber']").val();
+             let name = $(this).parents().eq(4).find("input[name='nameToInvoice']").val();
+             $(this).parents().eq(5).find('.name-to-invoice').text(name);
+             $(this).parents().eq(5).find('.invoice-taxnumber').text(taxNumber);
+             if(line1!=''){
+             $(this).parents().eq(5).find('.invoice-line1').text(line1+',');
+            }
+            if(line2!=''){
+             $(this).parents().eq(5).find('.invoice-line2').text(line2+',');
+             }
+             if(postalCode!=''){
+             $(this).parents().eq(5).find('.invoice-postalCode').text(postalCode+',');
+            }
+            if(city!=''){
+             $(this).parents().eq(5).find('.invoice-city').text(city+'.');
+            }
+           // $(this).parents().eq(5).find('.update-invoice').slideUp();
+        })
+        //click EDITAR 
+      $('.address-edit-click').click(function(){
+        if($(this).parents().eq(2).find('.update-invoice').css('display')=='none'){
+            
+            $(this).parents().eq(2).find('.btn-form-edit').trigger('click');
+            $(this).parents().eq(2).find('.update-invoice').slideDown();
+            $(this).parents().eq(2).find('.invoice-isnt-saved').removeClass('d-none');
+        }
+        else{
+            
+            $(this).parents().eq(2).find('.update-invoice').slideUp();
+        }
+      });
+
+
     },
 
     toggleFormFields:function(form, edit = false){
