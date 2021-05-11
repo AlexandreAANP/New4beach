@@ -39,7 +39,7 @@ Service Category: Categoria de Serviço
 Files: Ficheiros
 Terms: Termos
 About us: Sobre nós
-Products: Products
+Products: Produtos
 Contact: Contacto
 Customer Area: Área de Cliente
 Login: Entrar
@@ -105,7 +105,7 @@ Pdf Invoice/Receipt: Pdf Fatura/Recibo
 Name: Nome
 Fiscal Number: Número Fiscal
 Qty.: Qtd.
-Vat Tax: Vat Tax
+Vat Tax: IVA
 Discount: Desconto
 Payment Method: Método de Pagamento
 Delivery Method: Método de Entrega
@@ -124,7 +124,8 @@ Main Billing: Faturamento Principal
 Edit: Editar
 Delete: Apagar
 Save: Salvar
-add: Adicionar
+Add: Adicionar
+add: adicionar
 Are you sure you want to delete this registry?: Tem certeza de que deseja excluir este registro?
 Client Access: Acesso de Cliente
 Registered Users: Utilizadores Registados
@@ -218,3 +219,14 @@ New Invoice: Nova Fatura
 New Address: Nova Morada
 This website uses its own and third party cookies in order to personalize the content, improve the user experience, provide social media functions and analyze traffic. To continue browsing you must agree to our: Este site usa cookies próprios e de terceiros para personalizar o conteúdo, melhorar a experiência do usuário, fornecer funções de mídia social e analisar o tráfego. Para continuar navegando, você deve concordar com nossos
 Yes I do.: Sim, eu concordo
+Dashboard: Painel
+My Orders: Minhas Encomendas
+My Invoices: Minhas Faturas
+My Account: Minha Conta
+Support: Suporte
+Logout: Sair
+Required: Obrigatório
+The Current Password informed is invalid!: A senha atual informada é inválida!
+The New Password and Password Confirm are differents: A nova senha e a confirmação da senha são diferentes
+Invalid!: Inválido
+Invoice Data: Informação de Fatura

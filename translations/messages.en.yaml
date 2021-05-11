@@ -125,6 +125,7 @@ Edit: Edit
 Delete: Delete
 Save: Save
 Add: Add
+add: adicionar
 Are you sure you want to delete this registry?: Are you sure you want to delete this registry?
 Client Access: Client Access
 Registered Users: Registered Users
@@ -218,3 +219,14 @@ New Invoice: New Invoice
 New Address: New Address
 This website uses its own and third party cookies in order to personalize the content, improve the user experience, provide social media functions and analyze traffic. To continue browsing you must agree to our: This website uses its own and third party cookies in order to personalize the content, improve the user experience, provide social media functions and analyze traffic. To continue browsing you must agree to our
 Yes I do.: Yes I do. 
+Dashboard: Dashboard
+My Orders: My Orders
+My Invoices: My Invoices
+My Account: My Account
+Support: Support
+Logout: Logout
+Required: Required
+The Current Password informed is invalid!: The Current Password informed is invalid!
+The New Password and Password Confirm are differents: The New Password and Password Confirm are differents
+Invalid!: Invalid!
+Invoice Data: Invoice Data
